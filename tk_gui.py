@@ -1,7 +1,31 @@
 from tkinter import *
 
-def prosta_funkcja():
-    print("Prosta funkcja.")
+user_list=[]
+class Users:
+    def __init__(self,imie,nazwisko,posty,miejscowosc):
+        self.imie=imie
+        self.nazwisko=nazwisko
+        self.posty=posty
+        self.miejscowosc=miejscowosc
+
+def create_user()->None:
+    entry_imie.get()
+    imie=entry_imie.get()
+    nazwisko=entry_nazwisko.get()
+    posty=entry_posty.get()
+    miejscowosc=entry_miejscowosc.get()
+    uzytkownik=Users(imie, nazwisko, posty,miejscowosc)
+
+    user_list.append(uzytkownik)
+    # print(user_list)
+    show_user()
+def show_user()->None:
+    listbox_lista_uzytkownikow.delete(0, END)
+    for idx,user in enumerate(user_list):
+        print(idx,user.imie, user.nazwisko, user.posty, user.miejscowosc)
+        listbox_lista_uzytkownikow.insert(idx,f'{user.imie} {user.nazwisko}, {user.posty}, {user.miejscowosc}')
+
+
 
 root = Tk()
 root.geometry("800x700")
@@ -41,10 +65,12 @@ label_imie=Label(ramka_formularz,text="Imie")
 label_nazwisko=Label(ramka_formularz,text="Nazwisko")
 label_posty=Label(ramka_formularz,text="Posty")
 label_miejscowosc=Label(ramka_formularz,text="Miejscowość")
+
 entry_imie=Entry(ramka_formularz)
 entry_nazwisko=Entry(ramka_formularz)
 entry_posty=Entry(ramka_formularz)
 entry_miejscowosc=Entry(ramka_formularz)
+button_dodaj_uzytkownika=Button(ramka_formularz, text="Dodaj",command=create_user)
 
 
 
@@ -88,3 +114,5 @@ label_miejscowosc_szczegoly_wartosc.grid(row=1, column=7)
 
 
 root.mainloop()
+
+
